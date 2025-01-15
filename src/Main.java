@@ -5,10 +5,12 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 enum Haus {
     Stark, Lannister, Targaryen, Baratheon, Greyjoy, Martell, Tyrell
@@ -109,4 +111,12 @@ public class Main {
             return ereignisse;
         }
     }
+    public static List<Ereignis> filterByInitial(List<Ereignis> ereignisse, char initial) {
+        return ereignisse.stream()
+                .filter(e -> e.getMitgliedsname().charAt(0) == initial)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+
 }
